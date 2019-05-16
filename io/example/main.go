@@ -5,7 +5,8 @@ import (
 	"io"
 	"os"
 	"strings"
-	"z/go-src-exercise/go-src/io/myreader"
+
+	"github.com/mouuii/go-src/io/myreader"
 )
 
 func main1() {

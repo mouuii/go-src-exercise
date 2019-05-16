@@ -7,6 +7,7 @@ type alphaReader struct {
 	cur int
 }
 
+// NewAlphaReader : Create  myAlphaReader
 func NewAlphaReader(src string) *alphaReader {
 	return &alphaReader{src: src}
 }
