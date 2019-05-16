@@ -41,3 +41,26 @@ func (a *alphaReader) Read(p []byte) (int, error) {
 	copy(p, buf)
 	return n, nil
 }
+
+// also can read from any reader
+type alphaChainReader struct {
+	reader io.Reader
+}
+
+func (a *alphaChainReader) Read(p []byte) (int, error) {
+	n, err := a.reader.Read(p)
+	if err != nil {
+		return n, err
+	}
+	buf := make([]byte, n)
+	for i := 0; i < n; i++ {
+		if char := alpha(p[i]); char != 0 {
+			buf[i] = char
+		}
+	}
+	copy(p, buf)
+	return n, nil
+}
+func NewAlphaChainReader(reader io.Reader) *alphaChainReader {
+	return &alphaChainReader{reader: reader}
+}
